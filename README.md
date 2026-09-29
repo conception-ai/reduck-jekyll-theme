@@ -29,7 +29,7 @@ end
 theme: reduck-theme
 ```
 
-Both sites build from the head of `main`: their deploy runs `bundle update reduck-theme` first, so a
+Both sites build from the head of `main`: their deploy runs `bundle update --conservative reduck-theme` first, so a
 commit here reaches them on their next build (each also builds daily). Locally, run the same
 command to take the latest.
 
