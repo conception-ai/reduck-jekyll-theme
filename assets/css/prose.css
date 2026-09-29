@@ -22,13 +22,14 @@
 	margin: 0 0 1em;
 }
 
-/* Twice the air above as below, so a heading belongs to the section it opens. */
+/* Three times the air above as below, so a heading belongs to the section it opens. In the
+   heading's own `em`: 40px over a 32px heading, 13px under it. */
 .prose h2 {
 	font-size: var(--font-size-title-medium);
 	font-weight: 600;
 	letter-spacing: -0.02em;
 	line-height: 1.2;
-	margin: 2em 0 0.5em;
+	margin: 1.25em 0 0.4em;
 	scroll-margin-top: 24px;
 }
 
@@ -37,7 +38,7 @@
 	font-weight: 600;
 	letter-spacing: -0.01em;
 	line-height: 1.3;
-	margin: 1.75em 0 0.4em;
+	margin: 1.4em 0 0.35em;
 	scroll-margin-top: 24px;
 }
 
@@ -111,6 +112,17 @@
 
 .prose figure {
 	text-align: center;
+}
+
+/* A picture or a video is a pause in the reading, so it takes twice a paragraph's air on either
+   side; kramdown wraps a lone image in a `p`, hence the `:has`. Under a heading it stays close:
+   the heading is its title. */
+.prose :is(figure, .video-frame, p:has(> img:only-child)) {
+	margin: 2em 0;
+}
+
+.prose :is(h2, h3) + :is(figure, .video-frame, p:has(> img:only-child)) {
+	margin-top: 0;
 }
 
 .prose figure img {
