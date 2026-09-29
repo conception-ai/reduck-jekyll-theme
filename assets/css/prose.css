@@ -1,0 +1,190 @@
+/* How anything written to be read is set, on either site: the markdown's HTML inside a `.prose`
+   element, styled by tag, so there is no class a writer has to remember. Five rules: one ink, a
+   few sizes with weight doing the rest, blocks one line apart with headings closer to what they
+   open, a column of readable measure (the site's to set), and a single hairline where a frame is
+   needed. An ordered list is a run of steps (`system.css`, "numbered steps"). */
+
+/* One ink for everything that is read: hierarchy comes from size and weight, never from a
+   second grey. */
+.prose {
+	color: var(--color-grey-50);
+	font-size: var(--font-size-medium);
+	line-height: 1.6;
+}
+
+/* Every block is one line's worth of air from the next, so spacing groups nothing on its own and
+   the headings do the grouping. */
+.prose p,
+.prose ul,
+.prose figure,
+.prose table,
+.prose .code-block {
+	margin: 0 0 1em;
+}
+
+/* Twice the air above as below, so a heading belongs to the section it opens. */
+.prose h2 {
+	font-size: var(--font-size-title-medium);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+	margin: 2em 0 0.5em;
+	scroll-margin-top: 24px;
+}
+
+.prose h3 {
+	font-size: var(--font-size-title-small);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.3;
+	margin: 1.75em 0 0.4em;
+	scroll-margin-top: 24px;
+}
+
+/* A link is the text with a faint underline, at the text's weight, so a paragraph full of links
+   reads as a paragraph; the underline takes the accent when pointed at. */
+.prose a {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: rgb(255 255 255 / 0.35);
+	text-underline-offset: 0.15em;
+	transition: text-decoration-color 200ms;
+}
+
+.prose a:hover {
+	text-decoration-color: var(--color-orange-400);
+}
+
+/* A button dropped into prose is a button, not a link: the underline would draw through it. */
+.prose a.btn {
+	text-decoration: none;
+}
+
+.prose a.btn-primary,
+.prose a.btn-primary:hover {
+	color: var(--color-grey-900);
+}
+
+.prose strong {
+	font-weight: 600;
+}
+
+.prose em {
+	font-style: italic;
+}
+
+.prose ul {
+	list-style: disc;
+	padding-left: 24px;
+}
+
+.prose li {
+	margin: 0.25em 0;
+}
+
+.prose li::marker {
+	color: var(--color-grey-500);
+}
+
+.prose blockquote {
+	border-left: 2px solid var(--color-grey-600);
+	color: var(--color-grey-300);
+	margin: 1.5em 0;
+	padding-left: 20px;
+}
+
+.prose hr {
+	border: 0;
+	border-top: 1px solid var(--hairline);
+	margin: 3em 0;
+}
+
+/* A picture sits centred on its own line, the paragraph around it giving its spacing. */
+.prose img {
+	border: 1px solid var(--hairline);
+	border-radius: 8px;
+	display: block;
+	height: auto;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+.prose figure {
+	text-align: center;
+}
+
+.prose figure img {
+	margin-bottom: 10px;
+}
+
+.prose figcaption {
+	color: var(--color-grey-400);
+	font-size: var(--font-size-body);
+}
+
+/* `_includes/stream.html`'s box: a video is a block of its own, in prose or beside it. */
+.video-frame {
+	aspect-ratio: 16 / 9;
+	border: 1px solid var(--hairline);
+	border-radius: 8px;
+	margin: 0 0 1em;
+	overflow: hidden;
+	position: relative;
+}
+
+.video-frame iframe {
+	border: 0;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.prose table {
+	border-collapse: collapse;
+	display: block;
+	font-size: var(--font-size-body);
+	overflow-x: auto;
+	width: 100%;
+}
+
+.prose th,
+.prose td {
+	border: 1px solid var(--hairline);
+	padding: 8px 12px;
+	text-align: left;
+}
+
+.prose th {
+	background: var(--color-grey-800);
+	color: var(--color-grey-50);
+	font-weight: 600;
+}
+
+.prose code {
+	background: var(--color-grey-800);
+	border-radius: 4px;
+	font-family: var(--font-mono);
+	font-size: inherit;
+	padding: 2px 6px;
+}
+
+/* Kramdown's own wrapper would carry the prose's paragraph spacing on top of the frame's, so the
+   article's rhythm is set on the frame itself — everything else about it is `.code-block`. */
+.prose .highlighter-rouge {
+	margin: 0;
+}
+
+/* Code reads at the size of the text around it, so a block is not a step down from the prose. */
+.prose .code-block pre {
+	font-size: inherit;
+}
+
+/* Kramdown puts a `code` inside the `pre`; the chrome for inline code must not reach it. */
+.prose .code-block code {
+	background: none;
+	border-radius: 0;
+	font: inherit;
+	padding: 0;
+}

@@ -1,0 +1,45 @@
+{%- comment -%}
+  An embedded Cloudflare Stream video in a 16:9 frame, with VideoObject structured data so it can
+  earn a video result in search. The site's `_config.yml` names `cloudflare_stream_domain`.
+
+  Usage:
+    {% include stream.html id="VIDEO_UID" title="…" description="…" uploadDate="2026-09-16" duration="PT45S" poster="cover.png" %}
+  `id` is the Stream video UID, not a URL. The rest is optional: without `title` there is no
+  structured data, and search needs `uploadDate` too before it shows the video as one. `duration` is
+  ISO 8601 ("PT1M30S"). `poster` is a file beside the page, shown before play instead of Stream's
+  own frame; Stream fetches it, so it shows only once the site is deployed.
+{%- endcomment -%}
+{%- assign stream = "https://" | append: site.cloudflare_stream_domain | append: "/" | append: include.id -%}
+{%- if include.poster -%}
+	{%- assign thumbnail = page.url | append: include.poster | absolute_url -%}
+{%- else -%}
+	{%- assign thumbnail = stream | append: "/thumbnails/thumbnail.jpg" -%}
+{%- endif -%}
+<div class="video-frame">
+	<iframe
+		allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+		allowfullscreen="true"
+		loading="lazy"
+		src="{{ stream }}/iframe{% if include.poster %}?poster={{ thumbnail | url_encode }}{% endif %}"
+		title="{{ include.title | default: 'Embedded video' | escape }}"
+	></iframe>
+</div>
+{%- if include.title and include.title != "" %}
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		"name": {{ include.title | jsonify }},
+		"description": {{ include.description | default: include.title | jsonify }},
+		"thumbnailUrl": {{ thumbnail | jsonify }},
+		{%- if include.uploadDate %}
+		"uploadDate": {{ include.uploadDate | jsonify }},
+		{%- endif %}
+		{%- if include.duration %}
+		"duration": {{ include.duration | jsonify }},
+		{%- endif %}
+		"embedUrl": {{ stream | append: "/iframe" | jsonify }},
+		"contentUrl": {{ stream | append: "/manifest/video.m3u8" | jsonify }}
+	}
+</script>
+{%- endif %}

@@ -1,0 +1,374 @@
+/* The design system both reduck.ai subdomains are built on: the app's components restated as
+   plain CSS, so a class name here is the `type` or `model` prop there. A site adds only its own
+   chrome on top (its bar, its panel, its footer). */
+
+/* ---------------------------------------------------------------- buttons and links */
+
+.btn {
+	align-items: center;
+	cursor: pointer;
+	display: inline-flex;
+	font-weight: 500;
+	gap: 0.4em;
+	justify-content: center;
+	max-height: var(--button-height);
+	min-height: var(--button-height);
+	text-align: center;
+	text-decoration: none;
+	transition:
+		background 200ms,
+		border-color 200ms,
+		color 200ms;
+	white-space: nowrap;
+	width: fit-content;
+}
+
+.btn.small {
+	--button-height: 28px;
+
+	border-radius: 8px;
+	font-size: var(--font-size-small);
+	padding: 0 8px;
+}
+
+.btn.medium {
+	--button-height: 32px;
+
+	border-radius: 10px;
+	font-size: var(--font-size-body);
+	padding: 0 12px;
+}
+
+.btn.large {
+	--button-height: 40px;
+
+	border-radius: 12px;
+	font-size: var(--font-size-body);
+	padding: 0 16px;
+}
+
+/* An icon-only button is square rather than a short pill. */
+.btn.icon-only {
+	min-width: var(--button-height);
+	padding: 0;
+}
+
+.btn-primary {
+	background: var(--color-orange-400);
+	color: var(--color-grey-900);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+	background: var(--color-orange-500);
+}
+
+.btn-primary:active {
+	background: var(--color-orange-600);
+}
+
+.btn-secondary {
+	background: var(--color-grey-900);
+	border: 1px solid var(--color-grey-600);
+	color: var(--text-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+	background: var(--color-grey-700);
+	border-color: var(--color-grey-500);
+}
+
+.btn-secondary:active {
+	background: var(--color-grey-600);
+	border-color: var(--color-grey-500);
+}
+
+.btn-ghost {
+	color: var(--text-color);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+	background: var(--color-grey-700);
+}
+
+.btn-ghost:active,
+.btn-ghost.toggled {
+	background: var(--color-grey-600);
+}
+
+.btn .icon {
+	flex-shrink: 0;
+	height: 1em;
+	width: 1em;
+}
+
+/* A brand mark is drawn on a viewBox of its own and is rarely square, so its width follows its
+   height rather than being forced to match it. */
+.icon.brand {
+	height: 1em;
+	width: auto;
+}
+
+.tag {
+	align-items: center;
+	border-radius: 20px;
+	display: inline-flex;
+	font-size: 0.9em;
+	font-weight: 500;
+	gap: 4px;
+	justify-content: center;
+	line-height: 1.5em;
+	padding: 2px 8px;
+	white-space: nowrap;
+	width: fit-content;
+}
+
+.tag.neutral {
+	background: var(--color-grey-700);
+	color: var(--color-grey-0);
+}
+
+/* ---------------------------------------------------------------- code */
+
+.code-block {
+	background: var(--color-grey-800);
+	border: 1px solid var(--hairline);
+	border-radius: 8px;
+	display: flex;
+	margin: 0 0 20px;
+	overflow: hidden;
+	padding: 16px 42px 16px 24px;
+	position: relative;
+}
+
+.code-block pre {
+	color: var(--color-grey-100);
+	flex: 1;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-small);
+	line-height: 1.6;
+	margin: 0;
+	min-width: 0;
+	overflow: auto;
+	tab-size: 4;
+	white-space: pre;
+}
+
+.code-block .copy {
+	align-items: center;
+	border-radius: 8px;
+	color: var(--text-color);
+	display: inline-flex;
+	height: 28px;
+	justify-content: center;
+	position: absolute;
+	right: 8px;
+	top: 12px;
+	transition: background 200ms;
+	width: 28px;
+}
+
+.code-block .copy:hover {
+	background: var(--color-grey-700);
+}
+
+.code-block .copy .icon {
+	height: 12px;
+	width: 12px;
+}
+
+/* Rouge's token classes, mapped onto the colours `$lib/components/system/CodeBlock.svelte`
+   gives Prism's. Only the tokens the four highlighted languages emit are named. */
+.code-block .c,
+.code-block .c1,
+.code-block .cm,
+.code-block .cd,
+.code-block .cp {
+	color: var(--color-grey-400);
+}
+
+.code-block .s,
+.code-block .s1,
+.code-block .s2,
+.code-block .se,
+.code-block .sb,
+.code-block .sx,
+.code-block .dl,
+.code-block .sa {
+	color: var(--color-blue-300);
+}
+
+.code-block .k,
+.code-block .kd,
+.code-block .kn,
+.code-block .kr,
+.code-block .kc,
+.code-block .kt,
+.code-block .kp,
+.code-block .nb,
+.code-block .bp {
+	color: var(--color-purple-300);
+}
+
+.code-block .nf,
+.code-block .nc,
+.code-block .nx,
+.code-block .py,
+.code-block .na,
+.code-block .nt {
+	color: var(--color-green-300);
+}
+
+.code-block .m,
+.code-block .mi,
+.code-block .mf,
+.code-block .mh,
+.code-block .nv,
+.code-block .vg,
+.code-block .no {
+	color: var(--color-orange-300);
+}
+
+.code-block .p,
+.code-block .o,
+.code-block .ow {
+	color: var(--color-grey-300);
+}
+
+/* ---------------------------------------------------------------- callouts */
+
+.banner {
+	border-radius: 8px;
+	display: flex;
+	gap: 12px;
+	margin: 0 0 20px;
+	padding: 8px 12px;
+	text-align: left;
+	width: 100%;
+}
+
+.banner .banner-icon {
+	flex-shrink: 0;
+	height: 16px;
+	margin-top: 4px;
+	width: 16px;
+}
+
+.banner .banner-content {
+	color: var(--color-grey-50);
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	font-size: var(--font-size-body);
+	gap: 4px;
+	line-height: 1.5;
+	min-width: 0;
+}
+
+.banner .banner-content p {
+	margin: 0;
+}
+
+.banner .banner-content p + p {
+	margin-top: 12px;
+}
+
+.banner .banner-content a {
+	color: inherit;
+	font-weight: 500;
+	text-decoration: underline;
+}
+
+.banner .banner-content code {
+	background: rgb(0 0 0 / 0.25);
+	border-radius: 4px;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-small);
+	padding: 2px 6px;
+}
+
+.banner.info {
+	background: var(--color-blue-500-translucent-18);
+}
+
+.banner.info .banner-icon {
+	color: var(--color-blue-400);
+}
+
+.banner.success {
+	background: var(--color-green-500-translucent-18);
+}
+
+.banner.success .banner-icon {
+	color: var(--color-green-400);
+}
+
+.banner.warning {
+	background: var(--color-yellow-500-translucent-18);
+}
+
+.banner.warning .banner-icon {
+	color: var(--color-yellow-400);
+}
+
+.banner.danger {
+	background: var(--color-red-500-translucent-18);
+}
+
+.banner.danger .banner-icon {
+	color: var(--color-red-400);
+}
+
+/* ---------------------------------------------------------------- numbered steps */
+
+/* A run of numbered lines: a numeral per step, joined by a rail. The type is the surrounding
+   prose's, so a step reads like the paragraph above it. A `.steps` list and any `ol` in prose are
+   the same thing on the two sites, so they share this one rule. */
+:is(.steps, .prose ol) {
+	counter-reset: step;
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+:is(.steps, .prose ol) > li {
+	counter-increment: step;
+	margin: 0;
+	padding: 0.4lh 0 0.4lh 1.6lh;
+	position: relative;
+}
+
+/* An outline on the page colour, so the rail passes behind the numeral rather than through it. */
+:is(.steps, .prose ol) > li::before {
+	align-items: center;
+	background: var(--background-color);
+	border: 1px solid var(--color-grey-600);
+	border-radius: 50%;
+	box-sizing: border-box;
+	color: var(--color-grey-300);
+	content: counter(step);
+	display: flex;
+	font-size: var(--font-size-small);
+	font-weight: 600;
+	height: 1lh;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	top: 0.4lh;
+	width: 1lh;
+	z-index: var(--z-foreground);
+}
+
+:is(.steps, .prose ol) > li:not(:last-child)::after {
+	background: var(--color-grey-700);
+	bottom: -0.4lh;
+	content: "";
+	left: 0.5lh;
+	position: absolute;
+	top: 0.4lh;
+	width: 1px;
+}
