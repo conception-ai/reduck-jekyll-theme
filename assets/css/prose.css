@@ -176,11 +176,6 @@
 	margin: 0;
 }
 
-/* Code reads at the size of the text around it, so a block is not a step down from the prose. */
-.prose .code-block pre {
-	font-size: inherit;
-}
-
 /* Kramdown puts a `code` inside the `pre`; the chrome for inline code must not reach it. */
 .prose .code-block code {
 	background: none;

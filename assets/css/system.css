@@ -147,7 +147,7 @@
 	color: var(--color-grey-100);
 	flex: 1;
 	font-family: var(--font-mono);
-	font-size: var(--font-size-small);
+	font-size: var(--font-size-body);
 	line-height: 1.6;
 	margin: 0;
 	min-width: 0;
