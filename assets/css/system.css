@@ -342,7 +342,8 @@
 	position: relative;
 }
 
-/* An outline on the page colour, so the rail passes behind the numeral rather than through it. */
+/* An outline on the page colour, so the rail passes behind the numeral rather than through it.
+   Sized in `lh` at the step's own font size: a smaller numeral would shrink the circle with it. */
 :is(.steps, .prose ol) > li::before {
 	align-items: center;
 	background: var(--background-color);
@@ -352,7 +353,6 @@
 	color: var(--color-grey-300);
 	content: counter(step);
 	display: flex;
-	font-size: var(--font-size-small);
 	font-weight: 600;
 	height: 1lh;
 	justify-content: center;
