@@ -21,4 +21,8 @@
 		person_profiles: 'identified_only',
 		cross_subdomain_cookie: true
 	})
+	// rd_vid is the visitor id the Cloudflare Worker sets on .reduck.ai and logs with every
+	// request. Sending it with every event lets PostHog and the Cloudflare logs be joined.
+	var rdVid = document.cookie.match(/(?:^|;\s*)rd_vid=([^;]+)/)
+	if (rdVid) posthog.register({ rd_vid: rdVid[1] })
 </script>
