@@ -23,6 +23,15 @@
 	})
 	// rd_vid is the visitor id the Cloudflare Worker sets on .reduck.ai and logs with every
 	// request. Sending it with every event lets PostHog and the Cloudflare logs be joined.
-	var rdVid = document.cookie.match(/(?:^|;\s*)rd_vid=([^;]+)/)
-	if (rdVid) posthog.register({ rd_vid: rdVid[1] })
+	// With several rd_vid cookies, the first one holding a valid UUID wins, as in the Worker.
+	var rdVidParts = document.cookie.split(';')
+	for (var i = 0; i < rdVidParts.length; i++) {
+		var rdVidPair = rdVidParts[i].replace(/^\s+/, '')
+		if (rdVidPair.indexOf('rd_vid=') !== 0) continue
+		var rdVid = rdVidPair.slice(7).replace(/^\s+|\s+$/g, '')
+		if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(rdVid)) {
+			posthog.register({ rd_vid: rdVid })
+			break
+		}
+	}
 </script>
